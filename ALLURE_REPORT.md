@@ -3,7 +3,7 @@
 **Project:** Shiv Kheltantra — Bihar Sports Ecosystem Platform  
 **URL Under Test:** https://sktsports.in  
 **Report Date:** 2026-04-22  
-**Test Execution By:** Senior QA Engineering Team  
+**Test Execution By:** CloudYatra QA Team 
 **Environment:** Production (Live)  
 **Browser:** Chrome 136 (Primary), Responsive viewports tested  
 **Approach:** Data-Driven Testing (JSON test data files)
