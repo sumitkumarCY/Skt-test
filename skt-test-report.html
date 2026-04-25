@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Allure Report - Shiv Kheltantra QA | 2026-04-22</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#1a1a2e;--card:#16213e;--accent:#e94560;--green:#00b894;--yellow:#fdcb6e;--orange:#e17055;--text:#eee;--muted:#999;--blue:#0984e3}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:14px}
+.container{max-width:1200px;margin:0 auto;padding:20px}
+header{background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);padding:30px;border-radius:12px;margin-bottom:20px;text-align:center;border:1px solid #333}
+header h1{font-size:26px;background:linear-gradient(90deg,#e94560,#0984e3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+header p{color:var(--muted);margin-top:4px;font-size:13px}
+.verdict{padding:18px;border-radius:12px;text-align:center;margin:15px 0;font-size:20px;font-weight:bold;background:linear-gradient(135deg,#c0392b33,#e7454033);border:2px solid var(--accent);color:var(--accent)}
+.grid{display:grid;gap:15px;margin:15px 0}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--card);border-radius:10px;padding:16px;border:1px solid #2a2a4a;text-align:center}
+.card h3{font-size:13px;color:var(--muted);margin-bottom:4px}
+.card .n{font-size:32px;font-weight:bold}
+.green{color:var(--green)}.red{color:var(--accent)}.yel{color:var(--yellow)}.blu{color:var(--blue)}
+.section{margin:25px 0}
+.section h2{font-size:18px;padding:8px 0;border-bottom:2px solid #333;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:8px;overflow:hidden;margin:8px 0;font-size:13px}
+th{background:#0f3460;padding:10px 8px;text-align:left;font-weight:600}
+td{padding:8px;border-bottom:1px solid #2a2a4a}
+tr:hover{background:#1a1a3e}
+.pass{color:var(--green);font-weight:bold}.fail{color:var(--accent);font-weight:bold}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:bold}
+.badge.critical{background:#e9456033;color:var(--accent);border:1px solid var(--accent)}
+.badge.high{background:#e1705533;color:var(--orange);border:1px solid var(--orange)}
+.badge.medium{background:#fdcb6e33;color:var(--yellow);border:1px solid var(--yellow)}
+.badge.low{background:#00b89433;color:var(--green);border:1px solid var(--green)}
+.defect{background:var(--card);border-radius:10px;padding:16px;margin:12px 0;border-left:4px solid var(--accent)}
+.defect.high{border-left-color:var(--orange)}.defect.med{border-left-color:var(--yellow)}.defect.low{border-left-color:var(--green)}
+.defect h4{margin-bottom:6px;font-size:15px}
+.defect p{color:var(--muted);font-size:12px;margin:3px 0}
+.defect strong{color:var(--text)}
+.impact{margin:8px 0;padding:12px;background:#e9456015;border:1px solid var(--accent);border-radius:8px;font-size:12px;color:var(--accent)}
+.bar-row{display:flex;gap:8px;align-items:center;margin:6px 0}
+.bar-label{width:130px;font-size:12px;text-align:right;color:var(--muted)}
+.bar-track{flex:1;height:18px;background:#333;border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px}
+.positive{background:var(--card);border-radius:10px;padding:16px;margin:12px 0;border-left:4px solid var(--green)}
+.positive li{margin:4px 0;font-size:13px}
+.drop-zone{border:2px dashed #555;border-radius:10px;padding:20px;text-align:center;margin:10px 0;cursor:pointer;transition:all .3s}
+.drop-zone:hover,.drop-zone.over{border-color:var(--accent);background:#e9456010}
+.drop-zone p{color:var(--muted);font-size:13px}
+.embedded-img{max-width:100%;border-radius:8px;border:2px solid var(--accent);margin:8px 0}
+.share-info{background:#0984e320;border:1px solid var(--blue);border-radius:10px;padding:16px;margin:15px 0;font-size:13px}
+.share-info h3{color:var(--blue);margin-bottom:8px}
+.final-box{background:linear-gradient(135deg,#c0392b22,#e7454022);border:2px solid var(--accent);border-radius:12px;padding:20px;text-align:center}
+.final-box h3{color:var(--accent);font-size:22px;margin-bottom:8px}
+.final-box p{font-size:13px;margin:4px 0}
+footer{text-align:center;padding:25px;color:var(--muted);font-size:12px;border-top:1px solid #333;margin-top:30px}
+@media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}body{background:var(--bg)!important;color:var(--text)!important;font-size:11px}.card,.defect,.section,.positive,.final-box{break-inside:avoid}header{background:linear-gradient(135deg,#0f0c29,#302b63,#24243e)!important}header h1{background:linear-gradient(90deg,#e94560,#0984e3)!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important}.card{background:var(--card)!important;border:1px solid #2a2a4a!important}table{font-size:11px}th{background:#0f3460!important;color:#eee!important}td{border-bottom:1px solid #2a2a4a!important}.defect,.positive{background:var(--card)!important}.drop-zone{display:none}.screenshot-print{display:block!important;break-inside:avoid}.verdict{border:2px solid var(--accent)!important;color:var(--accent)!important;background:linear-gradient(135deg,#c0392b33,#e7454033)!important}.pass{color:var(--green)!important}.fail{color:var(--accent)!important}.badge.critical{background:#e9456033!important;color:var(--accent)!important;border:1px solid var(--accent)!important}.badge.high{background:#e1705533!important;color:var(--orange)!important;border:1px solid var(--orange)!important}.badge.medium{background:#fdcb6e33!important;color:var(--yellow)!important;border:1px solid var(--yellow)!important}.badge.low{background:#00b89433!important;color:var(--green)!important;border:1px solid var(--green)!important}tr:hover{background:transparent}.bar-track{background:#333!important}.impact{background:#e9456015!important;border:1px solid var(--accent)!important}.final-box{background:linear-gradient(135deg,#c0392b22,#e7454022)!important;border:2px solid var(--accent)!important}footer{border-top:1px solid #333!important}.embedded-img{display:block!important;max-width:100%!important}}
+@media(max-width:768px){.grid-4{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="container">
+
+
+<header>
+<h1>🏏 ALLURE TEST REPORT — Shiv Kheltantra (sktsports.in)</h1>
+<p>Report Date: 2026-04-22 | Environment: Production | Browser: Chrome 136 | Approach: Data-Driven (JSON)</p>
+</header>
+
+<div class="verdict">🔴 VERDICT: NO-GO — 1 CRITICAL Defect: Admin Dashboard Accessible Without Authentication</div>
+
+<div class="grid grid-4">
+<div class="card"><h3>Total Tests</h3><div class="n blu">59</div></div>
+<div class="card"><h3>Passed</h3><div class="n green">42</div></div>
+<div class="card"><h3>Failed</h3><div class="n red">10</div></div>
+<div class="card"><h3>Blocked</h3><div class="n yel">7</div></div>
+</div>
+
+<div class="section">
+<h2>📊 Pass Rate by Module</h2>
+<div class="bar-row"><span class="bar-label">Login (72%)</span><div class="bar-track"><div class="bar-fill" style="width:72%;background:var(--green)"></div></div></div>
+<div class="bar-row"><span class="bar-label">Registration (67%)</span><div class="bar-track"><div class="bar-fill" style="width:67%;background:var(--yellow)"></div></div></div>
+<div class="bar-row"><span class="bar-label">Navigation (92%)</span><div class="bar-track"><div class="bar-fill" style="width:92%;background:var(--green)"></div></div></div>
+<div class="bar-row"><span class="bar-label">Security (50%)</span><div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--accent)"></div></div></div>
+<div class="bar-row"><span class="bar-label">Responsive (100%)</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--green)"></div></div></div>
+</div>
+
+<div class="section">
+<h2>📁 Test Data Files Used</h2>
+<table><tr><th>File</th><th>Records</th><th>Scope</th></tr>
+<tr><td>loginData.json</td><td>18</td><td>Positive, negative, boundary, SQL/XSS injection</td></tr>
+<tr><td>registrationData.json</td><td>15</td><td>Positive, negative, boundary, security</td></tr>
+<tr><td>adminData.json</td><td>8</td><td>Authorization, role-based access</td></tr>
+<tr><td>contactFormData.json</td><td>6</td><td>Contact form validation</td></tr>
+<tr><td>navigationData.json</td><td>12</td><td>Route/page navigation testing</td></tr></table>
+</div>
+
+<div class="section">
+<h2>🧪 Login Module (13 Pass / 3 Fail / 2 Blocked)</h2>
+<table><tr><th>ID</th><th>Scenario</th><th>Test Data</th><th>Status</th></tr>
+<tr><td>TC_LOGIN_002</td><td>Invalid Password</td><td>WrongPassword123</td><td class="pass">✅ PASS</td></tr>
+<tr><td>TC_LOGIN_003</td><td>Empty Email</td><td>""</td><td class="pass">✅ PASS</td></tr>
+<tr><td>TC_LOGIN_005</td><td>Both Empty</td><td>""/""</td><td class="pass">✅ PASS</td></tr>
+<tr><td>TC_LOGIN_006</td><td>SQL Injection Email</td><td>' OR '1'='1'; --</td><td class="pass">✅ PASS</td></tr>
+<tr><td>TC_LOGIN_007</td><td>SQL Injection Password</td><td>DROP TABLE users</td><td class="pass">✅ PASS</td></tr>
+<tr><td>TC_LOGIN_008</td><td>XSS Email</td><td>&lt;script&gt;alert&lt;/script&gt;</td><td class="pass">✅ PASS</td></tr>
+<tr><td>TC_LOGIN_009</td><td>XSS Password</td><td>&lt;img onerror&gt;</td><td class="pass">✅ PASS</td></tr>
+<tr><td>TC_LOGIN_010</td><td>Invalid Email Format</td><td>invalidemail</td><td class="fail">❌ FAIL</td></tr>
+<tr><td>TC_LOGIN_012</td><td>Long Email 255+</td><td>255+ chars</td><td class="fail">❌ FAIL</td></tr>
+<tr><td>TC_LOGIN_013</td><td>Spaces-Only Password</td><td>10 spaces</td><td class="fail">❌ FAIL</td></tr>
+<tr><td>TC_LOGIN_014</td><td>Non-existent User</td><td>nonexistent@nowhere.com</td><td class="pass">✅ PASS</td></tr>
+<tr><td>TC_LOGIN_017</td><td>LDAP Injection</td><td>*)(&amp;(objectClass=*)</td><td class="pass">✅ PASS</td></tr>
+<tr><td>TC_LOGIN_018</td><td>HTML Injection</td><td>&lt;h1&gt;Injected&lt;/h1&gt;</td><td class="pass">✅ PASS</td></tr></table>
+</div>
+
+<div class="section">
+<h2>📝 Registration Module (10 Pass / 3 Fail / 2 Blocked)</h2>
+<table><tr><th>ID</th><th>Scenario</th><th>Test Data</th><th>Status</th></tr>
+<tr><td>TC_REG_002</td><td>Empty Full Name</td><td>""</td><td class="pass">✅ PASS</td></tr>
+<tr><td>TC_REG_005</td><td>All Fields Empty</td><td>""/""</td><td class="pass">✅ PASS</td></tr>
+<tr><td>TC_REG_006</td><td>Invalid Email</td><td>notanemail</td><td class="fail">❌ FAIL</td></tr>
+<tr><td>TC_REG_007</td><td>Weak Password</td><td>123</td><td class="fail">❌ FAIL</td></tr>
+<tr><td>TC_REG_009</td><td>SQL Injection Name</td><td>DROP TABLE</td><td class="pass">✅ PASS</td></tr>
+<tr><td>TC_REG_010</td><td>XSS Name</td><td>&lt;script&gt;</td><td class="pass">✅ PASS</td></tr>
+<tr><td>TC_REG_012</td><td>Long Name 500+</td><td>500+ chars</td><td class="fail">❌ FAIL</td></tr>
+<tr><td>TC_REG_014</td><td>Unicode Name</td><td>名前テスト用</td><td class="pass">✅ PASS</td></tr></table>
+</div>
+
+<div class="section">
+<h2>🔐 Security &amp; Auth (4 Pass / 2 Fail / 2 Blocked)</h2>
+<table><tr><th>ID</th><th>Scenario</th><th>Status</th><th>Risk</th></tr>
+<tr><td>TC_ADMIN_001</td><td>Unauth /dashboard</td><td class="fail">❌ CRITICAL</td><td><span class="badge critical">CRITICAL</span></td></tr>
+<tr><td>TC_ADMIN_002</td><td>/admin Access</td><td class="pass">✅ 404</td><td><span class="badge low">LOW</span></td></tr>
+<tr><td>TC_ADMIN_004</td><td>Path Traversal</td><td class="pass">✅ BLOCKED</td><td><span class="badge low">LOW</span></td></tr>
+<tr><td>TC_ADMIN_005</td><td>/dashboard/settings</td><td class="fail">❌ FAIL</td><td><span class="badge high">HIGH</span></td></tr>
+<tr><td>TC_ADMIN_007</td><td>SQL Injection URL</td><td class="pass">✅ PASS</td><td><span class="badge low">LOW</span></td></tr>
+<tr><td>TC_ADMIN_008</td><td>XSS URL Param</td><td class="pass">✅ PASS</td><td><span class="badge low">LOW</span></td></tr></table>
+</div>
+
+<div class="section">
+<h2>📱 Responsive &amp; ⚡ Performance</h2>
+<table><tr><th>Viewport</th><th>Homepage</th><th>Login</th><th>Database</th><th>Score</th></tr>
+<tr><td>Mobile 375×667</td><td class="pass">✅</td><td class="pass">✅</td><td class="pass">✅</td><td>9/10</td></tr>
+<tr><td>Tablet 768×1024</td><td class="pass">✅</td><td class="pass">✅</td><td class="pass">✅</td><td>9/10</td></tr>
+<tr><td>Desktop 1920×1080</td><td class="pass">✅</td><td class="pass">✅</td><td class="pass">✅</td><td>10/10</td></tr></table>
+<table style="margin-top:10px"><tr><th>Page</th><th>Load Time</th><th>Status</th></tr>
+<tr><td>Homepage</td><td>~1.5-2s</td><td class="pass">✅ GOOD</td></tr>
+<tr><td>About</td><td>~1s</td><td class="pass">✅ EXCELLENT</td></tr>
+<tr><td>Database</td><td>~2s</td><td class="pass">✅ ACCEPTABLE</td></tr>
+<tr><td>Login</td><td>~1s</td><td class="pass">✅ EXCELLENT</td></tr></table>
+</div>
+
+<div class="section">
+<h2>🐛 Defects (1 Critical, 3 High, 5 Medium, 3 Low)</h2>
+
+<div class="defect">
+<h4><span class="badge critical">CRITICAL</span> DEF-001: Admin Dashboard Accessible Without Authentication</h4>
+<p><strong>Module:</strong> Security | <strong>Data:</strong> URL: /dashboard, Authenticated: false</p>
+<p><strong>Steps:</strong> 1. Open browser → 2. Go to sktsports.in/dashboard → 3. Dashboard loads fully</p>
+<p><strong>Expected:</strong> Redirect to /login</p>
+<p><strong>Actual:</strong> Full admin dashboard: "Welcome back, SKT Super Admin", Users: 4, Inquiries: 2, Programs: 2. Sidebar: Users, CMS, CRM, Audit Log, Settings — ALL accessible</p>
+<div class="impact"><strong>IMPACT:</strong> Any anonymous user can access ALL admin functions. Complete authentication bypass. Severe production vulnerability.</div>
+<p style="color:var(--accent);margin-top:8px"><strong>📸 Screenshot Evidence — Drag &amp; drop the dashboard screenshot below:</strong></p>
+<div class="drop-zone" id="dz1" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+<p>📁 Drag &amp; drop <strong>critical_dashboard_access.png</strong> here<br><small>or click to select file</small></p>
+<input type="file" accept="image/*" style="display:none" onchange="handleFile(event,this.parentElement)">
+</div>
+</div>
+
+<div class="defect high">
+<h4><span class="badge high">HIGH</span> DEF-002: No Password Strength Validation</h4>
+<p><strong>Module:</strong> Registration | <strong>Data:</strong> password = "123"</p>
+<p><strong>Expected:</strong> Min 8 chars, complexity rules | <strong>Actual:</strong> 3-char password accepted</p>
+<div class="drop-zone" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+<p>📁 Drop screenshot here (optional)</p><input type="file" accept="image/*" style="display:none" onchange="handleFile(event,this.parentElement)">
+</div>
+</div>
+
+<div class="defect high">
+<h4><span class="badge high">HIGH</span> DEF-003: No Email Format Validation</h4>
+<p><strong>Module:</strong> Login &amp; Registration | <strong>Data:</strong> "invalidemail"</p>
+<p><strong>Expected:</strong> Format validation | <strong>Actual:</strong> Only browser native validation</p>
+<div class="drop-zone" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+<p>📁 Drop screenshot here for DEF-003</p><input type="file" accept="image/*" style="display:none" onchange="handleFile(event,this.parentElement)">
+</div>
+</div>
+
+<div class="defect high">
+<h4><span class="badge high">HIGH</span> DEF-004: No Input Length Limits</h4>
+<p><strong>Module:</strong> All Forms | <strong>Data:</strong> 255+ email, 500+ name</p>
+<p><strong>Expected:</strong> maxlength enforced | <strong>Actual:</strong> No limits — all oversized input accepted</p>
+<div class="drop-zone" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+<p>📁 Drop screenshot here for DEF-004</p><input type="file" accept="image/*" style="display:none" onchange="handleFile(event,this.parentElement)">
+</div>
+</div>
+
+<div class="defect med">
+<h4><span class="badge medium">MEDIUM</span> DEF-005: Whitespace-Only Password Accepted</h4>
+<p><strong>Data:</strong> 10 spaces | <strong>Actual:</strong> Sent to server without validation</p>
+<div class="drop-zone" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+<p>📁 Drop screenshot here for DEF-005</p><input type="file" accept="image/*" style="display:none" onchange="handleFile(event,this.parentElement)">
+</div>
+</div>
+
+<div class="defect med">
+<h4><span class="badge medium">MEDIUM</span> DEF-006: No Rate Limiting on Login</h4>
+<p>10+ rapid invalid attempts — no lockout or CAPTCHA</p>
+<div class="drop-zone" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+<p>📁 Drop screenshot here for DEF-006</p><input type="file" accept="image/*" style="display:none" onchange="handleFile(event,this.parentElement)">
+</div>
+</div>
+
+<div class="defect med">
+<h4><span class="badge medium">MEDIUM</span> DEF-007: Missing Security Headers</h4>
+<p>X-Frame-Options, CSP, HSTS potentially missing</p>
+<div class="drop-zone" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+<p>📁 Drop screenshot here for DEF-007</p><input type="file" accept="image/*" style="display:none" onchange="handleFile(event,this.parentElement)">
+</div>
+</div>
+
+<div class="defect med">
+<h4><span class="badge medium">MEDIUM</span> DEF-008: No Confirm Password Field</h4>
+<p>Registration has only single password field — typo risk</p>
+<div class="drop-zone" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+<p>📁 Drop screenshot here for DEF-008</p><input type="file" accept="image/*" style="display:none" onchange="handleFile(event,this.parentElement)">
+</div>
+</div>
+
+<div class="defect med">
+<h4><span class="badge medium">MEDIUM</span> DEF-009: Dashboard Sub-Routes Unprotected</h4>
+<p>/dashboard/settings accessible without auth</p>
+<div class="drop-zone" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+<p>📁 Drop screenshot here for DEF-009</p><input type="file" accept="image/*" style="display:none" onchange="handleFile(event,this.parentElement)">
+</div>
+</div>
+
+<div class="defect low">
+<h4><span class="badge low">LOW</span> DEF-010: Numbers-Only Name Accepted</h4>
+<div class="drop-zone" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+<p>📁 Drop screenshot here for DEF-010</p><input type="file" accept="image/*" style="display:none" onchange="handleFile(event,this.parentElement)">
+</div>
+</div>
+
+<div class="defect low">
+<h4><span class="badge low">LOW</span> DEF-011: No Password Visibility Toggle</h4>
+<div class="drop-zone" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+<p>📁 Drop screenshot here for DEF-011</p><input type="file" accept="image/*" style="display:none" onchange="handleFile(event,this.parentElement)">
+</div>
+</div>
+
+<div class="defect low">
+<h4><span class="badge low">LOW</span> DEF-012: Generic 404 Styling</h4>
+<div class="drop-zone" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+<p>📁 Drop screenshot here for DEF-012</p><input type="file" accept="image/*" style="display:none" onchange="handleFile(event,this.parentElement)">
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>🔒 Security Summary</h2>
+<table><tr><th>Category</th><th>Status</th></tr>
+<tr><td>Auth Bypass (/dashboard)</td><td class="fail">🔴 CRITICAL</td></tr>
+<tr><td>SQL Injection</td><td class="pass">✅ PROTECTED</td></tr>
+<tr><td>XSS</td><td class="pass">✅ PROTECTED</td></tr>
+<tr><td>HTML Injection</td><td class="pass">✅ PROTECTED</td></tr>
+<tr><td>Path Traversal</td><td class="pass">✅ BLOCKED</td></tr>
+<tr><td>User Enumeration</td><td class="pass">✅ PREVENTED</td></tr>
+<tr><td>HTTPS</td><td class="pass">✅ ENFORCED</td></tr>
+<tr><td>Brute Force</td><td class="fail">🟡 NOT IMPLEMENTED</td></tr>
+<tr><td>Password Policy</td><td class="fail">🟠 NOT ENFORCED</td></tr></table>
+</div>
+
+<div class="section">
+<h2>✅ Positive Findings</h2>
+<div class="positive"><ul style="list-style:none;padding:0">
+<li>✅ SQL Injection protection solid across all vectors</li>
+<li>✅ XSS protection effective — no script execution</li>
+<li>✅ Generic error messages prevent user enumeration</li>
+<li>✅ HTTPS enforced with redirect</li>
+<li>✅ Responsive design excellent — 9.3/10</li>
+<li>✅ Performance good — all pages under 2s</li>
+<li>✅ Path traversal blocked</li>
+<li>✅ Clean, professional UI/UX</li>
+</ul></div>
+</div>
+
+<div class="section">
+<h2>🚨 Final Recommendation</h2>
+<div class="final-box">
+<h3>🔴 NO-GO FOR PRODUCTION</h3>
+<p><strong>Must Fix:</strong></p>
+<p>1. DEF-001: Auth middleware on /dashboard + all admin routes</p>
+<p>2. DEF-002: Password strength policy (min 8, complexity)</p>
+<p>3. DEF-003: Custom email format validation</p>
+<p>4. DEF-004: maxlength + server-side length validation</p>
+<p>5. DEF-006: Rate limiting on login</p>
+<p style="margin-top:10px;color:var(--muted)">Re-test mandatory after fixes before GO decision.</p>
+</div>
+</div>
+
+<footer>
+<p>Senior QA Engineering Team | Data-Driven Testing | 5 JSON test data files | 8 Browser Recordings</p>
+<p>Report Generated: 2026-04-22 | Allure-Compatible Format</p>
+</footer>
+</div>
+
+<script>
+document.querySelectorAll('.drop-zone').forEach(z=>{z.addEventListener('click',()=>{const inp=z.querySelector('input');if(inp)inp.click()})});
+function handleDrop(e,el){e.preventDefault();el.classList.remove('over');const f=e.dataTransfer.files[0];if(f&&f.type.startsWith('image/'))showImg(f,el)}
+function handleFile(e,el){const f=e.target.files[0];if(f)showImg(f,el)}
+function showImg(f,el){
+  const r=new FileReader();
+  r.onload=function(e){
+    // Create a print-visible container as sibling AFTER the drop-zone
+    let container=el.nextElementSibling;
+    if(!container||!container.classList.contains('screenshot-print')){
+      container=document.createElement('div');
+      container.className='screenshot-print';
+      container.style.margin='10px 0';
+      el.parentNode.insertBefore(container,el.nextSibling);
+    }
+    // Add image to the print-visible container
+    const img=document.createElement('img');
+    img.src=e.target.result;
+    img.className='embedded-img';
+    img.style.maxWidth='100%';
+    img.style.borderRadius='8px';
+    img.style.border='2px solid var(--accent)';
+    container.innerHTML='';
+    container.appendChild(img);
+    // Also show in drop zone on screen
+    el.innerHTML='';
+    const img2=document.createElement('img');
+    img2.src=e.target.result;
+    img2.className='embedded-img';
+    img2.style.maxWidth='100%';
+    img2.style.borderRadius='8px';
+    img2.style.border='2px solid var(--green)';
+    el.appendChild(img2);
+    el.style.border='2px solid var(--green)';
+    el.style.cursor='default';
+  };
+  r.readAsDataURL(f);
+}
+</script>
+</body>
+</html>

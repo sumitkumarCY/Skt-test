@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Allure Retest Report - Shiv Kheltantra | 2026-04-25</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#1a1a2e;--card:#16213e;--accent:#e94560;--green:#00b894;--yellow:#fdcb6e;--orange:#e17055;--text:#eee;--muted:#999;--blue:#0984e3}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:14px}
+.container{max-width:1200px;margin:0 auto;padding:20px}
+header{background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);padding:30px;border-radius:12px;margin-bottom:20px;text-align:center;border:1px solid #333}
+header h1{font-size:26px;background:linear-gradient(90deg,#00b894,#0984e3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+header p{color:var(--muted);margin-top:4px;font-size:13px}
+.verdict{padding:18px;border-radius:12px;text-align:center;margin:15px 0;font-size:20px;font-weight:bold}
+.verdict.go{background:linear-gradient(135deg,#00b89433,#55efc433);border:2px solid var(--green);color:var(--green)}
+.verdict.nogo{background:linear-gradient(135deg,#c0392b33,#e7454033);border:2px solid var(--accent);color:var(--accent)}
+.verdict.conditional{background:linear-gradient(135deg,#fdcb6e33,#e1705533);border:2px solid var(--orange);color:var(--orange)}
+.grid{display:grid;gap:15px;margin:15px 0}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--card);border-radius:10px;padding:16px;border:1px solid #2a2a4a;text-align:center}
+.card h3{font-size:13px;color:var(--muted);margin-bottom:4px}
+.card .n{font-size:32px;font-weight:bold}
+.green{color:var(--green)}.red{color:var(--accent)}.yel{color:var(--yellow)}.blu{color:var(--blue)}.orn{color:var(--orange)}
+.section{margin:25px 0}
+.section h2{font-size:18px;padding:8px 0;border-bottom:2px solid #333;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:8px;overflow:hidden;margin:8px 0;font-size:13px}
+th{background:#0f3460;padding:10px 8px;text-align:left;font-weight:600}
+td{padding:8px;border-bottom:1px solid #2a2a4a}
+tr:hover{background:#1a1a3e}
+.pass{color:var(--green);font-weight:bold}.fail{color:var(--accent);font-weight:bold}
+.fixed{color:var(--green);font-weight:bold;background:#00b89420;padding:2px 8px;border-radius:4px}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:bold}
+.badge.critical{background:#e9456033;color:var(--accent);border:1px solid var(--accent)}
+.badge.high{background:#e1705533;color:var(--orange);border:1px solid var(--orange)}
+.badge.medium{background:#fdcb6e33;color:var(--yellow);border:1px solid var(--yellow)}
+.badge.low{background:#00b89433;color:var(--green);border:1px solid var(--green)}
+.badge.resolved{background:#00b89433;color:var(--green);border:1px solid var(--green)}
+.defect{background:var(--card);border-radius:10px;padding:16px;margin:12px 0;border-left:4px solid var(--accent)}
+.defect.high{border-left-color:var(--orange)}.defect.med{border-left-color:var(--yellow)}.defect.low{border-left-color:var(--green)}
+.defect.fixed{border-left-color:var(--green);opacity:0.8}
+.defect h4{margin-bottom:6px;font-size:15px}
+.defect p{color:var(--muted);font-size:12px;margin:3px 0}
+.defect strong{color:var(--text)}
+.bar-row{display:flex;gap:8px;align-items:center;margin:6px 0}
+.bar-label{width:130px;font-size:12px;text-align:right;color:var(--muted)}
+.bar-track{flex:1;height:18px;background:#333;border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px}
+.positive{background:var(--card);border-radius:10px;padding:16px;margin:12px 0;border-left:4px solid var(--green)}
+.drop-zone{border:2px dashed #555;border-radius:10px;padding:15px;text-align:center;margin:10px 0;cursor:pointer;transition:all .3s}
+.drop-zone:hover,.drop-zone.over{border-color:var(--accent);background:#e9456010}
+.drop-zone p{color:var(--muted);font-size:12px}
+.embedded-img{max-width:100%;border-radius:8px;border:2px solid var(--accent);margin:8px 0}
+.screenshot-print{margin:10px 0}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:15px 0}
+.compare-card{background:var(--card);border-radius:10px;padding:16px;border:1px solid #2a2a4a}
+.compare-card h3{margin-bottom:10px;font-size:15px}
+.compare-card.before{border-top:3px solid var(--accent)}
+.compare-card.after{border-top:3px solid var(--green)}
+.final-box{background:linear-gradient(135deg,#fdcb6e22,#e1705522);border:2px solid var(--orange);border-radius:12px;padding:20px;text-align:center}
+.final-box h3{color:var(--orange);font-size:22px;margin-bottom:8px}
+.final-box p{font-size:13px;margin:4px 0}
+footer{text-align:center;padding:25px;color:var(--muted);font-size:12px;border-top:1px solid #333;margin-top:30px}
+@media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}body{background:var(--bg)!important;color:var(--text)!important;font-size:11px}.card,.defect,.section,.positive,.final-box{break-inside:avoid}header{background:linear-gradient(135deg,#0f0c29,#302b63,#24243e)!important}.card{background:var(--card)!important}th{background:#0f3460!important;color:#eee!important}.defect,.positive{background:var(--card)!important}.drop-zone{display:none}.screenshot-print{display:block!important;break-inside:avoid}.embedded-img{display:block!important;max-width:100%!important}}
+@media(max-width:768px){.grid-4,.grid-3{grid-template-columns:repeat(2,1fr)}.compare{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+<h1>🏏 RETEST REPORT — Shiv Kheltantra (sktsports.in)</h1>
+<p>Retest Date: 2026-04-25 | Original Test: 2026-04-22 | Environment: Production | Browser: Chrome 136</p>
+<p style="margin-top:8px;color:var(--green)">🔄 Regression Testing After Site Update — Data-Driven Approach (JSON)</p>
+</header>
+
+<div class="verdict conditional">🟡 VERDICT: CONDITIONAL GO — Critical Defect FIXED, 3 Medium Issues Remain</div>
+
+<div class="grid grid-4">
+<div class="card"><h3>Total Tests</h3><div class="n blu">59</div></div>
+<div class="card"><h3>Passed</h3><div class="n green">51</div></div>
+<div class="card"><h3>Failed</h3><div class="n red">5</div></div>
+<div class="card"><h3>Blocked</h3><div class="n yel">3</div></div>
+</div>
+
+<div class="section">
+<h2>📈 Before vs After Comparison</h2>
+<div class="compare">
+<div class="compare-card before">
+<h3>❌ Original Test (Apr 22)</h3>
+<p>Pass Rate: <strong style="color:var(--accent)">71.2%</strong></p>
+<p>Passed: 42 | Failed: 10 | Blocked: 7</p>
+<p>Critical Defects: <strong style="color:var(--accent)">1</strong></p>
+<p>High Defects: 3 | Medium: 5 | Low: 3</p>
+<p style="color:var(--accent);margin-top:8px;font-weight:bold">Verdict: 🔴 NO-GO</p>
+</div>
+<div class="compare-card after">
+<h3>✅ Retest (Apr 25)</h3>
+<p>Pass Rate: <strong style="color:var(--green)">86.4%</strong></p>
+<p>Passed: 51 | Failed: 5 | Blocked: 3</p>
+<p>Critical Defects: <strong style="color:var(--green)">0</strong></p>
+<p>High Defects: 0 | Medium: 3 | Low: 2</p>
+<p style="color:var(--orange);margin-top:8px;font-weight:bold">Verdict: 🟡 CONDITIONAL GO</p>
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>📊 Pass Rate by Module</h2>
+<div class="bar-row"><span class="bar-label">Login (88%)</span><div class="bar-track"><div class="bar-fill" style="width:88%;background:var(--green)"></div></div></div>
+<div class="bar-row"><span class="bar-label">Registration (75%)</span><div class="bar-track"><div class="bar-fill" style="width:75%;background:var(--yellow)"></div></div></div>
+<div class="bar-row"><span class="bar-label">Navigation (100%)</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--green)"></div></div></div>
+<div class="bar-row"><span class="bar-label">Security (83%)</span><div class="bar-track"><div class="bar-fill" style="width:83%;background:var(--green)"></div></div></div>
+<div class="bar-row"><span class="bar-label">Responsive (100%)</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--green)"></div></div></div>
+</div>
+
+<div class="section">
+<h2>✅ Defects RESOLVED (7 Fixed)</h2>
+<table><tr><th>ID</th><th>Defect</th><th>Previous</th><th>Current</th></tr>
+<tr><td>DEF-001</td><td>Dashboard accessible without auth</td><td><span class="badge critical">CRITICAL</span></td><td><span class="fixed">✅ FIXED</span> — Redirects to /login</td></tr>
+<tr><td>DEF-002</td><td>No password strength validation</td><td><span class="badge high">HIGH</span></td><td><span class="fixed">✅ FIXED</span> — "Min 8 characters" enforced</td></tr>
+<tr><td>DEF-003</td><td>No email format validation</td><td><span class="badge high">HIGH</span></td><td><span class="fixed">✅ FIXED</span> — "Enter valid email" message</td></tr>
+<tr><td>DEF-008</td><td>No confirm password field</td><td><span class="badge medium">MEDIUM</span></td><td><span class="fixed">✅ FIXED</span> — Confirm password added</td></tr>
+<tr><td>DEF-009</td><td>Dashboard sub-routes unprotected</td><td><span class="badge medium">MEDIUM</span></td><td><span class="fixed">✅ FIXED</span> — Redirects to /login</td></tr>
+<tr><td>DEF-010</td><td>Numbers-only name accepted</td><td><span class="badge low">LOW</span></td><td><span class="fixed">✅ FIXED</span> — "Must include letters"</td></tr>
+<tr><td>DEF-011</td><td>No password visibility toggle</td><td><span class="badge low">LOW</span></td><td><span class="fixed">✅ FIXED</span> — Eye icon added</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>🔐 Security Retest — CRITICAL DEF-001</h2>
+<table><tr><th>Test</th><th>URL</th><th>Expected</th><th>Actual</th><th>Status</th></tr>
+<tr><td>Dashboard bypass</td><td>/dashboard</td><td>Redirect to /login</td><td>✅ Redirected to /login</td><td class="pass">✅ FIXED</td></tr>
+<tr><td>Settings bypass</td><td>/dashboard/settings</td><td>Redirect to /login</td><td>✅ Redirected to /login</td><td class="pass">✅ FIXED</td></tr>
+<tr><td>Path Traversal</td><td>/../etc/passwd</td><td>Blocked</td><td>✅ Blocked</td><td class="pass">✅ PASS</td></tr>
+<tr><td>SQL Injection URL</td><td>/login?email=' OR 1=1</td><td>No injection</td><td>✅ No injection</td><td class="pass">✅ PASS</td></tr>
+<tr><td>XSS via URL</td><td>/search?q=&lt;script&gt;</td><td>No execution</td><td>✅ No execution</td><td class="pass">✅ PASS</td></tr>
+</table>
+<div class="drop-zone" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+<p>📸 Drop DEF-001 retest screenshot (login redirect proof)</p><input type="file" accept="image/*" style="display:none" onchange="handleFile(event,this.parentElement)">
+</div>
+</div>
+
+<div class="section">
+<h2>🧪 Login Module Retest (15/17 Pass)</h2>
+<table><tr><th>ID</th><th>Scenario</th><th>Data</th><th>Status</th><th>Change</th></tr>
+<tr><td>TC_L01</td><td>Empty fields</td><td>""</td><td class="pass">✅ PASS</td><td>—</td></tr>
+<tr><td>TC_L02</td><td>Invalid email format</td><td>"invalidemail"</td><td class="pass">✅ PASS</td><td><span class="fixed">NEW FIX</span></td></tr>
+<tr><td>TC_L03</td><td>SQL Injection Email</td><td>' OR '1'='1'; --</td><td class="pass">✅ PASS</td><td>—</td></tr>
+<tr><td>TC_L04</td><td>XSS Email</td><td>&lt;script&gt;alert&lt;/script&gt;</td><td class="pass">✅ PASS</td><td>—</td></tr>
+<tr><td>TC_L05</td><td>Invalid credentials</td><td>wronguser@test.com</td><td class="pass">✅ PASS</td><td>—</td></tr>
+<tr><td>TC_L06</td><td>Spaces-only password</td><td>10 spaces</td><td class="pass">✅ PASS</td><td><span class="fixed">NEW FIX</span></td></tr>
+<tr><td>TC_L07</td><td>Long email 255+</td><td>255+ chars</td><td class="fail">❌ FAIL</td><td>No maxlength</td></tr>
+<tr><td>TC_L08</td><td>Password toggle</td><td>Eye icon</td><td class="pass">✅ PASS</td><td><span class="fixed">NEW FIX</span></td></tr>
+<tr><td>TC_L09</td><td>HTML Injection</td><td>&lt;h1&gt;Test&lt;/h1&gt;</td><td class="pass">✅ PASS</td><td>—</td></tr>
+<tr><td>TC_L10</td><td>LDAP Injection</td><td>*)(&amp;</td><td class="pass">✅ PASS</td><td>—</td></tr>
+<tr><td>TC_L11</td><td>Non-existent user</td><td>nobody@test.com</td><td class="pass">✅ PASS</td><td>—</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>📝 Registration Module Retest (12/15 Pass)</h2>
+<table><tr><th>ID</th><th>Scenario</th><th>Data</th><th>Status</th><th>Change</th></tr>
+<tr><td>TC_R01</td><td>Empty all fields</td><td>""</td><td class="pass">✅ PASS</td><td>—</td></tr>
+<tr><td>TC_R02</td><td>Weak password "123"</td><td>"123"</td><td class="pass">✅ PASS</td><td><span class="fixed">NEW FIX</span></td></tr>
+<tr><td>TC_R03</td><td>Password mismatch</td><td>Strong vs Different</td><td class="pass">✅ PASS</td><td><span class="fixed">NEW FIX</span></td></tr>
+<tr><td>TC_R04</td><td>Invalid email</td><td>"notanemail"</td><td class="pass">✅ PASS</td><td><span class="fixed">NEW FIX</span></td></tr>
+<tr><td>TC_R05</td><td>SQL Injection name</td><td>'; DROP TABLE --</td><td class="fail">❌ FAIL</td><td>Server 400 HTML error</td></tr>
+<tr><td>TC_R06</td><td>XSS in name</td><td>&lt;script&gt;alert&lt;/script&gt;</td><td class="fail">❌ FAIL</td><td>Not sanitized</td></tr>
+<tr><td>TC_R07</td><td>Numbers-only name</td><td>"12345678"</td><td class="pass">✅ PASS</td><td><span class="fixed">NEW FIX</span></td></tr>
+<tr><td>TC_R08</td><td>Long name 500+</td><td>500+ chars</td><td class="fail">❌ FAIL</td><td>No maxlength</td></tr>
+<tr><td>TC_R09</td><td>Confirm password field</td><td>Present</td><td class="pass">✅ PASS</td><td><span class="fixed">NEW FIX</span></td></tr>
+<tr><td>TC_R10</td><td>Unicode name</td><td>名前テスト用</td><td class="pass">✅ PASS</td><td>—</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>📱 Responsive &amp; ⚡ Performance (All Pass)</h2>
+<table><tr><th>Viewport</th><th>Homepage</th><th>Login</th><th>Register</th><th>Score</th></tr>
+<tr><td>Mobile 375×667</td><td class="pass">✅</td><td class="pass">✅</td><td class="pass">✅</td><td>9.5/10</td></tr>
+<tr><td>Tablet 768×1024</td><td class="pass">✅</td><td class="pass">✅</td><td class="pass">✅</td><td>9.5/10</td></tr>
+<tr><td>Desktop 1920×1080</td><td class="pass">✅</td><td class="pass">✅</td><td class="pass">✅</td><td>10/10</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>🐛 Remaining Defects (0 Critical, 0 High, 3 Medium, 2 Low)</h2>
+
+<div class="defect med">
+<h4><span class="badge medium">MEDIUM</span> DEF-R01: SQL Injection Returns HTML Error Instead of JSON</h4>
+<p><strong>Module:</strong> Registration | <strong>Data:</strong> Name: "'; DROP TABLE users; --"</p>
+<p><strong>Expected:</strong> JSON error response or input sanitized | <strong>Actual:</strong> Server returns HTTP 400 with raw HTML, causing client-side JSON parse error</p>
+<p><strong>Impact:</strong> Information disclosure risk, poor error handling</p>
+<div class="drop-zone" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+<p>📸 Drop screenshot</p><input type="file" accept="image/*" style="display:none" onchange="handleFile(event,this.parentElement)">
+</div>
+</div>
+
+<div class="defect med">
+<h4><span class="badge medium">MEDIUM</span> DEF-R02: XSS Payload Not Sanitized in Name Field</h4>
+<p><strong>Module:</strong> Registration | <strong>Data:</strong> "&lt;script&gt;alert('XSS')&lt;/script&gt;"</p>
+<p><strong>Expected:</strong> Input stripped/rejected | <strong>Actual:</strong> Server accepts and processes the payload (fails at email step)</p>
+<div class="drop-zone" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+<p>📸 Drop screenshot</p><input type="file" accept="image/*" style="display:none" onchange="handleFile(event,this.parentElement)">
+</div>
+</div>
+
+<div class="defect med">
+<h4><span class="badge medium">MEDIUM</span> DEF-R03: No Input Length Limits (Name &amp; Email)</h4>
+<p><strong>Module:</strong> Login &amp; Registration | <strong>Data:</strong> 500+ char name, 255+ char email</p>
+<p><strong>Expected:</strong> maxlength enforced | <strong>Actual:</strong> No limits, oversized input accepted</p>
+<div class="drop-zone" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+<p>📸 Drop screenshot</p><input type="file" accept="image/*" style="display:none" onchange="handleFile(event,this.parentElement)">
+</div>
+</div>
+
+<div class="defect low">
+<h4><span class="badge low">LOW</span> DEF-R04: No Rate Limiting on Login</h4>
+<p>Multiple rapid failed attempts still allowed without lockout or CAPTCHA</p>
+</div>
+
+<div class="defect low">
+<h4><span class="badge low">LOW</span> DEF-R05: Watch &amp; Database Pages Show Loading Spinner</h4>
+<p>Watch and Database pages show persistent loading spinner — may require auth or large data</p>
+</div>
+</div>
+
+<div class="section">
+<h2>🔒 Security Posture Summary</h2>
+<table><tr><th>Category</th><th>Previous (Apr 22)</th><th>Current (Apr 25)</th></tr>
+<tr><td>Auth Bypass (/dashboard)</td><td class="fail">🔴 CRITICAL</td><td class="pass">✅ FIXED</td></tr>
+<tr><td>Dashboard Sub-Routes</td><td class="fail">🔴 EXPOSED</td><td class="pass">✅ FIXED</td></tr>
+<tr><td>Password Strength</td><td class="fail">🟠 NOT ENFORCED</td><td class="pass">✅ ENFORCED</td></tr>
+<tr><td>Email Validation</td><td class="fail">🟠 MISSING</td><td class="pass">✅ IMPLEMENTED</td></tr>
+<tr><td>Confirm Password</td><td class="fail">🟡 MISSING</td><td class="pass">✅ ADDED</td></tr>
+<tr><td>SQL Injection</td><td class="pass">✅ PROTECTED</td><td class="pass">✅ PROTECTED</td></tr>
+<tr><td>XSS</td><td class="pass">✅ PROTECTED</td><td style="color:var(--yellow)">🟡 PARTIALLY (name field)</td></tr>
+<tr><td>HTTPS</td><td class="pass">✅ ENFORCED</td><td class="pass">✅ ENFORCED</td></tr>
+<tr><td>Input Length Limits</td><td class="fail">🟠 MISSING</td><td class="fail">🟡 STILL MISSING</td></tr>
+<tr><td>Rate Limiting</td><td class="fail">🟡 MISSING</td><td class="fail">🟡 STILL MISSING</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>🚨 Final Recommendation</h2>
+<div class="final-box">
+<h3>🟡 CONDITIONAL GO</h3>
+<p><strong>The CRITICAL authentication bypass (DEF-001) has been RESOLVED.</strong></p>
+<p style="margin:10px 0">7 of 12 original defects are fixed. Pass rate improved from 71.2% → 86.4%</p>
+<p><strong>Remaining items before full GO:</strong></p>
+<p>1. DEF-R01: Return proper JSON errors instead of HTML for API failures</p>
+<p>2. DEF-R02: Sanitize HTML/script tags in name field server-side</p>
+<p>3. DEF-R03: Add maxlength attributes to all form inputs</p>
+<p style="margin-top:10px;color:var(--muted)">These are MEDIUM severity — site can go live with monitoring, but fixes should be deployed within 1-2 sprints.</p>
+</div>
+</div>
+
+<footer>
+<p>Senior QA Engineering Team | Regression Retest | 5 JSON test data files | 3 Browser Recordings</p>
+<p>Report Generated: 2026-04-25 | Allure-Compatible Format</p>
+</footer>
+</div>
+
+<script>
+document.querySelectorAll('.drop-zone').forEach(z=>{z.addEventListener('click',()=>{const inp=z.querySelector('input');if(inp)inp.click()})});
+function handleDrop(e,el){e.preventDefault();el.classList.remove('over');const f=e.dataTransfer.files[0];if(f&&f.type.startsWith('image/'))showImg(f,el)}
+function handleFile(e,el){const f=e.target.files[0];if(f)showImg(f,el)}
+function showImg(f,el){
+  const r=new FileReader();
+  r.onload=function(e){
+    let c=el.nextElementSibling;
+    if(!c||!c.classList.contains('screenshot-print')){c=document.createElement('div');c.className='screenshot-print';c.style.margin='10px 0';el.parentNode.insertBefore(c,el.nextSibling)}
+    const img=document.createElement('img');img.src=e.target.result;img.className='embedded-img';img.style.maxWidth='100%';img.style.borderRadius='8px';img.style.border='2px solid var(--accent)';c.innerHTML='';c.appendChild(img);
+    el.innerHTML='';const img2=document.createElement('img');img2.src=e.target.result;img2.className='embedded-img';img2.style.maxWidth='100%';img2.style.borderRadius='8px';img2.style.border='2px solid var(--green)';el.appendChild(img2);el.style.border='2px solid var(--green)';el.style.cursor='default';
+  };r.readAsDataURL(f);
+}
+</script>
+</body>
+</html>

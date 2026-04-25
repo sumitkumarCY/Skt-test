@@ -1,0 +1,142 @@
+{
+  "testSuite": "Registration Module - Data Driven Tests",
+  "version": "1.0",
+  "lastUpdated": "2026-04-22",
+  "testData": [
+    {
+      "testId": "TC_REG_001",
+      "scenario": "Valid Registration",
+      "category": "positive",
+      "fullName": "John Test User",
+      "email": "qa.test.user.001@mailinator.com",
+      "password": "SecurePass@123",
+      "expectedResult": "Account created successfully"
+    },
+    {
+      "testId": "TC_REG_002",
+      "scenario": "Empty Full Name",
+      "category": "negative",
+      "fullName": "",
+      "email": "test002@mailinator.com",
+      "password": "SecurePass@123",
+      "expectedResult": "Name required validation error"
+    },
+    {
+      "testId": "TC_REG_003",
+      "scenario": "Empty Email",
+      "category": "negative",
+      "fullName": "Test User",
+      "email": "",
+      "password": "SecurePass@123",
+      "expectedResult": "Email required validation error"
+    },
+    {
+      "testId": "TC_REG_004",
+      "scenario": "Empty Password",
+      "category": "negative",
+      "fullName": "Test User",
+      "email": "test004@mailinator.com",
+      "password": "",
+      "expectedResult": "Password required validation error"
+    },
+    {
+      "testId": "TC_REG_005",
+      "scenario": "All Fields Empty",
+      "category": "negative",
+      "fullName": "",
+      "email": "",
+      "password": "",
+      "expectedResult": "Multiple validation errors"
+    },
+    {
+      "testId": "TC_REG_006",
+      "scenario": "Invalid Email Format",
+      "category": "negative",
+      "fullName": "Test User",
+      "email": "notanemail",
+      "password": "SecurePass@123",
+      "expectedResult": "Email format validation error"
+    },
+    {
+      "testId": "TC_REG_007",
+      "scenario": "Weak Password (too short)",
+      "category": "boundary",
+      "fullName": "Test User",
+      "email": "test007@mailinator.com",
+      "password": "123",
+      "expectedResult": "Password strength validation error"
+    },
+    {
+      "testId": "TC_REG_008",
+      "scenario": "Duplicate Email Registration",
+      "category": "negative",
+      "fullName": "Duplicate User",
+      "email": "testuser@sktsports.in",
+      "password": "SecurePass@123",
+      "expectedResult": "Email already exists error"
+    },
+    {
+      "testId": "TC_REG_009",
+      "scenario": "SQL Injection in Name",
+      "category": "security",
+      "fullName": "'; DROP TABLE users; --",
+      "email": "sqlinject@test.com",
+      "password": "SecurePass@123",
+      "expectedResult": "Input sanitized, no DB damage"
+    },
+    {
+      "testId": "TC_REG_010",
+      "scenario": "XSS in Name Field",
+      "category": "security",
+      "fullName": "<script>alert('XSS')</script>",
+      "email": "xss@test.com",
+      "password": "SecurePass@123",
+      "expectedResult": "Script tags stripped/escaped"
+    },
+    {
+      "testId": "TC_REG_011",
+      "scenario": "Name with Numbers Only",
+      "category": "boundary",
+      "fullName": "12345678",
+      "email": "numname@mailinator.com",
+      "password": "SecurePass@123",
+      "expectedResult": "Validation error or accepted"
+    },
+    {
+      "testId": "TC_REG_012",
+      "scenario": "Extremely Long Name (500+ chars)",
+      "category": "boundary",
+      "fullName": "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRST",
+      "email": "longname@mailinator.com",
+      "password": "SecurePass@123",
+      "expectedResult": "Validation error - Name too long"
+    },
+    {
+      "testId": "TC_REG_013",
+      "scenario": "Password with 256+ characters",
+      "category": "boundary",
+      "fullName": "Test User",
+      "email": "longpass@mailinator.com",
+      "password": "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRST",
+      "expectedResult": "Handled gracefully"
+    },
+    {
+      "testId": "TC_REG_014",
+      "scenario": "Unicode Name Characters",
+      "category": "boundary",
+      "fullName": "名前テスト用",
+      "email": "unicode@mailinator.com",
+      "password": "SecurePass@123",
+      "expectedResult": "Unicode handled properly"
+    },
+    {
+      "testId": "TC_REG_015",
+      "scenario": "Email with Subdomain",
+      "category": "boundary",
+      "fullName": "Test User",
+      "email": "test@sub.domain.mailinator.com",
+      "password": "SecurePass@123",
+      "expectedResult": "Valid email accepted"
+    }
+  ]
+}

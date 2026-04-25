@@ -1,0 +1,169 @@
+{
+  "testSuite": "Login Module - Data Driven Tests",
+  "version": "1.0",
+  "lastUpdated": "2026-04-22",
+  "testData": [
+    {
+      "testId": "TC_LOGIN_001",
+      "scenario": "Valid Login - Standard User",
+      "category": "positive",
+      "email": "testuser@sktsports.in",
+      "password": "Test@12345",
+      "expectedResult": "Dashboard redirect",
+      "expectedStatusCode": 200
+    },
+    {
+      "testId": "TC_LOGIN_002",
+      "scenario": "Invalid Password",
+      "category": "negative",
+      "email": "testuser@sktsports.in",
+      "password": "WrongPassword123",
+      "expectedResult": "Error message displayed",
+      "expectedStatusCode": 401
+    },
+    {
+      "testId": "TC_LOGIN_003",
+      "scenario": "Empty Email Field",
+      "category": "negative",
+      "email": "",
+      "password": "Test@12345",
+      "expectedResult": "Validation error - Email required",
+      "expectedStatusCode": 400
+    },
+    {
+      "testId": "TC_LOGIN_004",
+      "scenario": "Empty Password Field",
+      "category": "negative",
+      "email": "testuser@sktsports.in",
+      "password": "",
+      "expectedResult": "Validation error - Password required",
+      "expectedStatusCode": 400
+    },
+    {
+      "testId": "TC_LOGIN_005",
+      "scenario": "Both Fields Empty",
+      "category": "negative",
+      "email": "",
+      "password": "",
+      "expectedResult": "Validation errors for both fields",
+      "expectedStatusCode": 400
+    },
+    {
+      "testId": "TC_LOGIN_006",
+      "scenario": "SQL Injection - Email Field",
+      "category": "security",
+      "email": "' OR '1'='1'; --",
+      "password": "anything",
+      "expectedResult": "Input rejected or sanitized",
+      "expectedStatusCode": 401
+    },
+    {
+      "testId": "TC_LOGIN_007",
+      "scenario": "SQL Injection - Password Field",
+      "category": "security",
+      "email": "test@test.com",
+      "password": "' OR '1'='1'; DROP TABLE users; --",
+      "expectedResult": "Input rejected or sanitized",
+      "expectedStatusCode": 401
+    },
+    {
+      "testId": "TC_LOGIN_008",
+      "scenario": "XSS Attack - Email Field",
+      "category": "security",
+      "email": "<script>alert('XSS')</script>",
+      "password": "Test@12345",
+      "expectedResult": "Input sanitized, no script execution",
+      "expectedStatusCode": 400
+    },
+    {
+      "testId": "TC_LOGIN_009",
+      "scenario": "XSS Attack - Password Field",
+      "category": "security",
+      "email": "test@test.com",
+      "password": "<img src=x onerror=alert('XSS')>",
+      "expectedResult": "Input sanitized, no script execution",
+      "expectedStatusCode": 401
+    },
+    {
+      "testId": "TC_LOGIN_010",
+      "scenario": "Invalid Email Format",
+      "category": "negative",
+      "email": "invalidemail",
+      "password": "Test@12345",
+      "expectedResult": "Email format validation error",
+      "expectedStatusCode": 400
+    },
+    {
+      "testId": "TC_LOGIN_011",
+      "scenario": "Email with Special Characters",
+      "category": "boundary",
+      "email": "test+special@sktsports.in",
+      "password": "Test@12345",
+      "expectedResult": "Accepted or proper validation",
+      "expectedStatusCode": 200
+    },
+    {
+      "testId": "TC_LOGIN_012",
+      "scenario": "Extremely Long Email (255+ chars)",
+      "category": "boundary",
+      "email": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@test.com",
+      "password": "Test@12345",
+      "expectedResult": "Validation error - Email too long",
+      "expectedStatusCode": 400
+    },
+    {
+      "testId": "TC_LOGIN_013",
+      "scenario": "Password with Only Spaces",
+      "category": "boundary",
+      "email": "test@test.com",
+      "password": "          ",
+      "expectedResult": "Validation error or auth failure",
+      "expectedStatusCode": 401
+    },
+    {
+      "testId": "TC_LOGIN_014",
+      "scenario": "Non-existent User",
+      "category": "negative",
+      "email": "nonexistent.user.xyz@nowhere.com",
+      "password": "Test@12345",
+      "expectedResult": "Invalid credentials error",
+      "expectedStatusCode": 401
+    },
+    {
+      "testId": "TC_LOGIN_015",
+      "scenario": "Case Sensitivity Test - Email",
+      "category": "boundary",
+      "email": "TESTUSER@SKTSPORTS.IN",
+      "password": "Test@12345",
+      "expectedResult": "Case-insensitive email matching",
+      "expectedStatusCode": 200
+    },
+    {
+      "testId": "TC_LOGIN_016",
+      "scenario": "Unicode Characters in Password",
+      "category": "boundary",
+      "email": "test@test.com",
+      "password": "Pässwörd™©®",
+      "expectedResult": "Proper handling of unicode",
+      "expectedStatusCode": 401
+    },
+    {
+      "testId": "TC_LOGIN_017",
+      "scenario": "LDAP Injection Attempt",
+      "category": "security",
+      "email": "*)(&(objectClass=*)",
+      "password": "test",
+      "expectedResult": "Input rejected",
+      "expectedStatusCode": 400
+    },
+    {
+      "testId": "TC_LOGIN_018",
+      "scenario": "HTML Injection",
+      "category": "security",
+      "email": "<h1>Injected</h1>",
+      "password": "<b>Bold</b>",
+      "expectedResult": "HTML tags stripped/escaped",
+      "expectedStatusCode": 400
+    }
+  ]
+}

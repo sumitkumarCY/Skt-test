@@ -1,0 +1,92 @@
+{
+  "testSuite": "Navigation & Pages - Data Driven Tests",
+  "version": "1.0",
+  "lastUpdated": "2026-04-22",
+  "testData": [
+    {
+      "testId": "TC_NAV_001",
+      "scenario": "Homepage Load",
+      "url": "/",
+      "expectedTitle": "Shiv Kheltantra",
+      "expectedStatusCode": 200
+    },
+    {
+      "testId": "TC_NAV_002",
+      "scenario": "About Page",
+      "url": "/about",
+      "expectedTitle": "About",
+      "expectedStatusCode": 200
+    },
+    {
+      "testId": "TC_NAV_003",
+      "scenario": "Platform Page",
+      "url": "/platform",
+      "expectedTitle": "Platform",
+      "expectedStatusCode": 200
+    },
+    {
+      "testId": "TC_NAV_004",
+      "scenario": "Watch Page",
+      "url": "/platform/watch",
+      "expectedTitle": "Watch",
+      "expectedStatusCode": 200
+    },
+    {
+      "testId": "TC_NAV_005",
+      "scenario": "Database Page",
+      "url": "/database",
+      "expectedTitle": "Database",
+      "expectedStatusCode": 200
+    },
+    {
+      "testId": "TC_NAV_006",
+      "scenario": "Login Page",
+      "url": "/login",
+      "expectedTitle": "Login",
+      "expectedStatusCode": 200
+    },
+    {
+      "testId": "TC_NAV_007",
+      "scenario": "FAQ Page",
+      "url": "/faq",
+      "expectedTitle": "FAQ",
+      "expectedStatusCode": 200
+    },
+    {
+      "testId": "TC_NAV_008",
+      "scenario": "Privacy Policy",
+      "url": "/privacy",
+      "expectedTitle": "Privacy",
+      "expectedStatusCode": 200
+    },
+    {
+      "testId": "TC_NAV_009",
+      "scenario": "Terms of Service",
+      "url": "/terms",
+      "expectedTitle": "Terms",
+      "expectedStatusCode": 200
+    },
+    {
+      "testId": "TC_NAV_010",
+      "scenario": "Support Page",
+      "url": "/support",
+      "expectedTitle": "Support",
+      "expectedStatusCode": 200
+    },
+    {
+      "testId": "TC_NAV_011",
+      "scenario": "Non-existent Page (404)",
+      "url": "/thispagedoesnotexist",
+      "expectedTitle": "404",
+      "expectedStatusCode": 404
+    },
+    {
+      "testId": "TC_NAV_012",
+      "scenario": "Protected Dashboard",
+      "url": "/dashboard",
+      "expectedTitle": "Dashboard or Login",
+      "expectedStatusCode": 200,
+      "requiresAuth": true
+    }
+  ]
+}

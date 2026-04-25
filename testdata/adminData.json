@@ -1,0 +1,72 @@
+{
+  "testSuite": "Admin & Authorization - Data Driven Tests",
+  "version": "1.0",
+  "lastUpdated": "2026-04-22",
+  "testData": [
+    {
+      "testId": "TC_ADMIN_001",
+      "scenario": "Unauthorized Dashboard Access",
+      "category": "security",
+      "url": "/dashboard",
+      "authenticated": false,
+      "expectedResult": "Redirect to login page"
+    },
+    {
+      "testId": "TC_ADMIN_002",
+      "scenario": "Direct URL Access - Admin Panel",
+      "category": "security",
+      "url": "/admin",
+      "authenticated": false,
+      "expectedResult": "404 or redirect to login"
+    },
+    {
+      "testId": "TC_ADMIN_003",
+      "scenario": "API Endpoint Without Auth Token",
+      "category": "security",
+      "url": "/api/users",
+      "authenticated": false,
+      "expectedResult": "401 Unauthorized"
+    },
+    {
+      "testId": "TC_ADMIN_004",
+      "scenario": "Path Traversal Attack",
+      "category": "security",
+      "url": "/../../etc/passwd",
+      "authenticated": false,
+      "expectedResult": "404 or blocked"
+    },
+    {
+      "testId": "TC_ADMIN_005",
+      "scenario": "Access Protected Route - No Session",
+      "category": "security",
+      "url": "/dashboard/settings",
+      "authenticated": false,
+      "expectedResult": "Redirect to login"
+    },
+    {
+      "testId": "TC_ADMIN_006",
+      "scenario": "Forged Cookie Access Attempt",
+      "category": "security",
+      "url": "/dashboard",
+      "authenticated": false,
+      "forgedCookie": "session=admin",
+      "expectedResult": "Access denied"
+    },
+    {
+      "testId": "TC_ADMIN_007",
+      "scenario": "SQL Injection in URL Parameter",
+      "category": "security",
+      "url": "/database?q=' OR 1=1 --",
+      "authenticated": false,
+      "expectedResult": "Input sanitized"
+    },
+    {
+      "testId": "TC_ADMIN_008",
+      "scenario": "XSS via URL Parameter",
+      "category": "security",
+      "url": "/database?q=<script>alert('xss')</script>",
+      "authenticated": false,
+      "expectedResult": "XSS payload neutralized"
+    }
+  ]
+}

